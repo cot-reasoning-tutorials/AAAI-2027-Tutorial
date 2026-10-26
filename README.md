@@ -76,7 +76,8 @@ assets/people/      — speaker portraits
 - **Light / dark theme** follows the system preference and can be toggled; the choice is
   remembered in `localStorage`.
 - **Centered layout** throughout: headings, prose, session cards, and grids are
-  centered on the page; the Program section combines the outline and schedule in one place.
+  centered on the page; the Program section combines the outline and schedule on a
+  vertical timeline.
 - **Responsive** down to 360 px: the navigation collapses into a menu and every section
   stacks cleanly.
 - **Accessibility**: skip link, visible focus rings, semantic landmarks, and
