@@ -499,6 +499,32 @@ h3 {
   color: var(--muted);
 }
 
+/* ---------- Program figure ---------- */
+.program-figure {
+  max-width: 980px;
+  margin: 0 auto 40px;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.program-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.program-figure figcaption {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: center;
+  color: #59617a;
+}
+
 /* ---------- Program timeline ---------- */
 .timeline {
   position: relative;
@@ -901,6 +927,14 @@ img.avatar {
 @media (max-width: 700px) {
   .overview-title {
     white-space: normal;
+  }
+
+  .program-figure {
+    overflow-x: auto;
+  }
+
+  .program-figure img {
+    min-width: 640px;
   }
 }
 
