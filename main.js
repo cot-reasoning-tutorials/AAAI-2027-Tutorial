@@ -92,46 +92,4 @@
     });
   }
 
-  /* ---------- Copy BibTeX ---------- */
-  var copyButton = document.getElementById('copy-citation');
-  var bibtex = document.getElementById('bibtex');
-
-  if (copyButton && bibtex) {
-    copyButton.addEventListener('click', function () {
-      var text = bibtex.textContent.trim();
-      var label = copyButton.querySelector('span');
-      var done = function () {
-        label.textContent = 'Copied!';
-        setTimeout(function () {
-          label.textContent = 'Copy';
-        }, 1800);
-      };
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done, fallback);
-      } else {
-        fallback();
-      }
-
-      function fallback() {
-        var area = document.createElement('textarea');
-        area.value = text;
-        area.setAttribute('readonly', '');
-        area.style.position = 'fixed';
-        area.style.opacity = '0';
-        document.body.appendChild(area);
-        area.select();
-        try {
-          document.execCommand('copy');
-          done();
-        } catch (e) {
-          label.textContent = 'Press Ctrl+C';
-          setTimeout(function () {
-            label.textContent = 'Copy';
-          }, 1800);
-        }
-        document.body.removeChild(area);
-      }
-    });
-  }
 })();

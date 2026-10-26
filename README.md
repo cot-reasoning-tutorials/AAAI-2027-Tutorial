@@ -34,10 +34,8 @@ things that are only known closer to the conference.
 
 | Item | Where in `index.html` | What to change |
 | --- | --- | --- |
-| Tutorial day, clock times, room | `.hero-meta`, `#program` intro | Add the confirmed AAAI-27 slot |
+| Tutorial day, clock times, room | `.hero-meta` | Add the confirmed AAAI-27 slot |
 | Slides link | `#materials` first card | Replace “Coming soon” with the PDF link |
-| GitHub Discussions | `#materials` third card | Enable Discussions in the repo settings |
-| Citation details | `#bibtex` | Update pages/volume once published |
 | Contact email | footer `mailto:` | Currently `qinlibo@hit.edu.cn` |
 
 ### Speaker photos
