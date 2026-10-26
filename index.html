@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chain-of-Thought Reasoning in Large Language Models — AAAI-27 Tutorial</title>
+  <meta name="description" content="An AAAI-27 tutorial on chain-of-thought reasoning in large language models: recent advances and new frontiers in mechanisms, cross-lingual and cross-modal reasoning, faithfulness, and efficiency." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Chain-of-Thought Reasoning in Large Language Models — AAAI-27 Tutorial" />
+  <meta property="og:description" content="Recent advances and new frontiers in CoT reasoning: mechanisms, cross-lingual and cross-modal transfer, faithfulness, and efficiency." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cot-reasoning-tutorials.github.io/AAAI-2027-Tutorial/" />
+  <meta property="og:image" content="https://cot-reasoning-tutorials.github.io/AAAI-2027-Tutorial/assets/preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Chain-of-Thought Reasoning in Large Language Models — AAAI-27 Tutorial" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://cot-reasoning-tutorials.github.io/AAAI-2027-Tutorial/assets/preview.png" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    // Mark JS as available and apply the stored theme before first paint.
+    document.documentElement.classList.add('js');
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="15" fill="currentColor" />
+          <circle cx="20" cy="32" r="6" fill="#fff" />
+          <circle cx="44" cy="20" r="6" fill="#fff" opacity=".85" />
+          <circle cx="44" cy="44" r="6" fill="#fff" opacity=".85" />
+          <path d="M25 29 39 22M25 35 39 42" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".7" />
+        </svg>
+        <span class="brand-text">CoT Reasoning<small>AAAI-27 Tutorial</small></span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#speakers">Speakers</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="#materials">Materials</a></li>
+          <li><a href="#citation">Citation</a></li>
+        </ul>
+
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <p class="venue-badge">
+          <span class="dot" aria-hidden="true"></span>
+          AAAI-27 Tutorial &middot; Montr&eacute;al, Canada
+        </p>
+
+        <h1><span class="accent">Chain-of-Thought Reasoning</span> in Large Language Models</h1>
+        <p class="hero-sub">Recent Advances and New Frontiers</p>
+
+        <p class="tagline">
+          A systematic, lecture-based tour of how chain-of-thought reasoning works in LLMs &mdash;
+          from its evolution and taxonomy to mechanisms, cross-lingual and cross-modal transfer,
+          faithfulness, and efficiency.
+        </p>
+
+        <div class="hero-flow" aria-hidden="true">
+          <span class="node">Question</span>
+          <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          <span class="node">Reasoning trace</span>
+          <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          <span class="node">Verification</span>
+          <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          <span class="node">Answer</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#program">
+            Explore the program
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <a class="btn btn-ghost" href="#materials">Materials</a>
+        </div>
+
+        <ul class="hero-meta">
+          <li class="item">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18"></path></svg>
+            During AAAI-27 &middot; Feb 16&ndash;23, 2027
+          </li>
+          <li class="item">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            Half-day &middot; 3.5 h + 30 min break
+          </li>
+          <li class="item">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Montr&eacute;al, Canada
+          </li>
+          <li class="item">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Lecture-based &middot; no lab required
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== OVERVIEW ===================== -->
+    <section class="section" id="overview">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Overview</span>
+          <h2>A systematic map of chain-of-thought reasoning</h2>
+          <p>
+            Six sessions trace CoT from its origins to the research frontier &mdash; mechanisms,
+            languages, modalities, faithfulness, and efficiency.
+          </p>
+        </div>
+
+        <div class="prose reveal">
+          <p>
+            Chain-of-thought (CoT) reasoning has become a central approach to enhancing the
+            reasoning capabilities of large language models (LLMs), evolving from early prompting
+            methods that elicit short intermediate rationales to recent reasoning models that
+            generate long and complex reasoning traces. These advances have opened new research
+            directions while raising fundamental questions about how reasoning works, how it
+            transfers across languages and modalities, whether generated rationales faithfully
+            reflect model behavior, and how reasoning can be made more efficient.
+          </p>
+          <p>
+            This tutorial provides a systematic overview of the foundations, recent advances, and
+            emerging frontiers of CoT reasoning. We begin with the evolution and taxonomy of CoT,
+            then explore five research directions: <strong>mechanisms</strong> (explicit, implicit,
+            and latent reasoning), <strong>cross-lingual</strong> transfer and low-resource
+            languages, <strong>cross-modal</strong> grounding in images and video,
+            <strong>faithful and verifiable</strong> rationales, and <strong>efficient</strong>
+            inference. Each module presents motivation, representative methods, key findings, and
+            open research problems.
+          </p>
+          <p>
+            The tutorial is intended for researchers and practitioners working on LLMs, natural
+            language processing, reasoning models, multimodal learning, and trustworthy AI, as well
+            as students interested in CoT reasoning. Familiarity with basic machine learning, deep
+            learning, and LLM concepts is recommended, but no prior expertise in CoT reasoning is
+            required.
+          </p>
+        </div>
+
+        <div class="q-grid">
+          <article class="q-card reveal">
+            <div class="q-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.3 1-1.8A7 7 0 0 0 12 2z"></path></svg>
+            </div>
+            <h3>How does CoT work?</h3>
+            <p>Explicit, implicit, and latent reasoning &mdash; and what mechanistic evidence reveals about model behavior.</p>
+          </article>
+
+          <article class="q-card reveal">
+            <div class="q-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"></path></svg>
+            </div>
+            <h3>Where does it transfer?</h3>
+            <p>Cross-lingual reasoning from high- to low-resource languages, and cross-modal grounding in images and video.</p>
+          </article>
+
+          <article class="q-card reveal">
+            <div class="q-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            </div>
+            <h3>Can we trust it &mdash; and afford it?</h3>
+            <p>Faithful, verifiable rationales alongside adaptive computation and reasoning compression.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SPEAKERS ===================== -->
+    <section class="section" id="speakers">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Speakers</span>
+          <h2>Tutorial team</h2>
+          <p>
+            Six speakers from Harbin Institute of Technology (Shenzhen), the University of Oxford,
+            Shanghai Jiao Tong University, Peking University, and Shanghai AI Laboratory.
+          </p>
+        </div>
+
+        <ul class="speakers-grid">
+          <li class="speaker reveal">
+            <img class="avatar" src="assets/people/libo-qin.jpg" alt="Libo Qin" width="96" height="96" loading="lazy" />
+            <h3><a href="https://qinlibo-hit.github.io/" target="_blank" rel="noopener">Libo Qin</a></h3>
+            <p class="affil">Harbin Institute of Technology, Shenzhen</p>
+            <p class="bio">Associate Professor. Natural language processing and LLM reasoning; tutorials at IJCAI and NLPCC.</p>
+          </li>
+          <li class="speaker reveal">
+            <img class="avatar" src="assets/people/hao-fei.jpg" alt="Hao Fei" width="96" height="96" loading="lazy" />
+            <h3><a href="https://haofei.vip/" target="_blank" rel="noopener">Hao Fei</a></h3>
+            <p class="affil">University of Oxford</p>
+            <p class="bio">Senior Research Fellow. Multimodal foundation models and symbolic chain-of-thought reasoning.</p>
+          </li>
+          <li class="speaker reveal">
+            <img class="avatar" src="assets/people/zhuosheng-zhang.jpg" alt="Zhuosheng Zhang" width="96" height="96" loading="lazy" />
+            <h3><a href="https://bcmi.sjtu.edu.cn/home/zhangzs/" target="_blank" rel="noopener">Zhuosheng Zhang</a></h3>
+            <p class="affil">Shanghai Jiao Tong University</p>
+            <p class="bio">Assistant Professor. Large language models, reasoning, and agents.</p>
+          </li>
+          <li class="speaker reveal">
+            <img class="avatar" src="assets/people/liangming-pan.jpg" alt="Liangming Pan" width="96" height="96" loading="lazy" />
+            <h3><a href="https://liangmingpan.bio/" target="_blank" rel="noopener">Liangming Pan</a></h3>
+            <p class="affil">Peking University</p>
+            <p class="bio">Assistant Professor. LLM reasoning mechanisms and explainable AI.</p>
+          </li>
+          <li class="speaker reveal">
+            <img class="avatar" src="assets/people/yafu-li.jpg" alt="Yafu Li" width="96" height="96" loading="lazy" />
+            <h3><a href="https://yafuly.github.io/" target="_blank" rel="noopener">Yafu Li</a></h3>
+            <p class="affil">Shanghai AI Laboratory &middot; CUHK</p>
+            <p class="bio">Researcher. LLM reasoning, trustworthy AI, and machine translation.</p>
+          </li>
+          <li class="speaker reveal">
+            <img class="avatar" src="assets/people/min-zhang.jpg" alt="Min Zhang" width="96" height="96" loading="lazy" />
+            <h3><a href="https://homepage.hit.edu.cn/MinZhang" target="_blank" rel="noopener">Min Zhang</a></h3>
+            <p class="affil">Harbin Institute of Technology, Shenzhen</p>
+            <p class="bio">Professor. Multimodal reasoning, large models, and natural language generation.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== PROGRAM ===================== -->
+    <section class="section" id="program">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Program</span>
+          <h2>Six sessions, one coherent story</h2>
+          <p>
+            Six 35-minute sessions &mdash; 210 minutes of instruction plus a 30-minute break.
+            Each session pairs foundational framing with representative methods and open research
+            directions. Clock times will be posted once the AAAI-27 program is released.
+          </p>
+        </div>
+
+        <ol class="timeline">
+          <li class="part reveal">
+            <span class="part-num">01</span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill accent">35 min</span>
+                <span class="pill">Libo Qin &amp; Min Zhang</span>
+              </div>
+              <h3>Background and recent advances</h3>
+              <p>
+                We define CoT reasoning in LLMs, trace its origins in intermediate natural-language
+                rationales, and review its impact on arithmetic, symbolic, commonsense, and code
+                reasoning. A recent taxonomy organizes methods by sample design (manual, automatic,
+                self-generated), reasoning process (single pass, refinement, search, verification),
+                and reasoning structure (linear, tree, graph, program), connecting short-rationale
+                prompting to long-CoT and reasoning-model paradigms.
+              </p>
+              <ul class="chips">
+                <li>Definition &amp; origins</li>
+                <li>Taxonomy</li>
+                <li>Short vs. long CoT</li>
+                <li>Reasoning models</li>
+                <li>Training &amp; inference scaling</li>
+              </ul>
+              <div class="session-note">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+                <span><strong>Open questions:</strong> process supervision, evaluation beyond final-answer accuracy, benchmark contamination, robustness to noisy rationales, and adaptive test-time compute.</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="part reveal">
+            <span class="part-num">02</span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill accent">35 min</span>
+                <span class="pill">Liangming Pan</span>
+              </div>
+              <h3>Mechanisms of CoT reasoning</h3>
+              <p>
+                We frame the &ldquo;black-box&rdquo; challenge by distinguishing explicit CoT
+                (verbalized intermediate steps), implicit reasoning (computation without a written
+                trace), and latent CoT (reasoning in continuous hidden states). We examine
+                reasoning-path aggregation, latent reasoning, and behavioural tests of stepwise
+                computation, together with analysis tools such as logit lenses, attention
+                inspection, causal interventions, activation patching, and controlled task
+                construction.
+              </p>
+              <ul class="chips">
+                <li>Explicit vs. implicit</li>
+                <li>Latent CoT</li>
+                <li>Reasoning paths</li>
+                <li>Logit lens</li>
+                <li>Activation patching</li>
+                <li>Causal interventions</li>
+              </ul>
+              <div class="session-note">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+                <span><strong>Open questions:</strong> theoretical accounts of SFT and RL, causal identification of reusable reasoning circuits, verbal&ndash;latent interactions, and model-control objectives for hallucination mitigation.</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="part reveal">
+            <span class="part-num">03</span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill accent">35 min</span>
+                <span class="pill">Libo Qin</span>
+              </div>
+              <h3>Cross-lingual CoT reasoning</h3>
+              <p>
+                We separate the language of the question, demonstrations, rationale, and answer
+                &mdash; a formulation that explains why reasoning ability varies across languages
+                and why low-resource settings pose challenges beyond translation quality. Using
+                multilingual prompting and the MGSM benchmark, we compare direct multilingual
+                reasoning, translate-then-reason, reason-then-translate, pivot-language reasoning,
+                language-neutral logical representations, multilingual self-consistency, and
+                alignment of reasoning trajectories.
+              </p>
+              <ul class="chips">
+                <li>Multilingual prompting</li>
+                <li>MGSM</li>
+                <li>Translate-then-reason</li>
+                <li>Pivot language</li>
+                <li>Self-consistency</li>
+                <li>Low-resource transfer</li>
+              </ul>
+              <div class="session-note">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+                <span><strong>Open questions:</strong> separating reasoning transfer from translation effects, controlling tokenizer and script differences, culturally grounded evaluation, and consistency when valid explanations differ across languages.</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="part is-break reveal">
+            <span class="part-num" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9z"></path><path d="M16 10h2a2 2 0 0 1 0 4h-2"></path><path d="M7 4c0 1 1 1 1 2M11 4c0 1 1 1 1 2"></path></svg>
+            </span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill">30 min</span>
+              </div>
+              <h3>Coffee break</h3>
+            </div>
+          </li>
+
+          <li class="part reveal">
+            <span class="part-num">04</span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill accent">35 min</span>
+                <span class="pill">Hao Fei</span>
+              </div>
+              <h3>Cross-modal CoT reasoning</h3>
+              <p>
+                For visual understanding, structured intermediate steps can bridge language with
+                spatial and temporal evidence in images and videos. We distinguish failures of
+                perception from failures of inference, then cover two-stage rationale-and-answer
+                models, event- and object-centric reasoning, structured intermediate
+                representations, interleaved visual&ndash;text traces, symbolic multimodal logic,
+                and temporally grounded video reasoning.
+              </p>
+              <ul class="chips">
+                <li>Visual grounding</li>
+                <li>Two-stage rationale &rarr; answer</li>
+                <li>Interleaved traces</li>
+                <li>Symbolic multimodal logic</li>
+                <li>Video reasoning</li>
+              </ul>
+              <div class="session-note">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+                <span><strong>Open questions:</strong> long-horizon video reasoning, multimodal reasoning agents, fine-grained evidence attribution, visual-token efficiency, and counterfactual evaluation.</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="part reveal">
+            <span class="part-num">05</span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill accent">35 min</span>
+                <span class="pill">Zhuosheng Zhang</span>
+              </div>
+              <h3>Faithful CoT reasoning</h3>
+              <p>
+                A fluent rationale can be plausible without reporting the factors that actually
+                caused a prediction. We separate final-answer correctness, step-level validity,
+                evidence grounding, causal faithfulness, calibration, and consistency between a
+                stated plan and the actions taken. Methods include counterfactual tests,
+                perturbations and causal interventions, process and outcome verification,
+                uncertainty estimation, and symbolic translation and checking.
+              </p>
+              <ul class="chips">
+                <li>Unfaithful explanations</li>
+                <li>Step-level validity</li>
+                <li>Causal faithfulness</li>
+                <li>Process verification</li>
+                <li>Uncertainty</li>
+                <li>Symbolic checking</li>
+              </ul>
+              <div class="session-note">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+                <span><strong>Open questions:</strong> scalable supervision when gold reasoning processes are unavailable, human-in-the-loop escalation, adversarial rationales, and faithfulness in multi-agent settings.</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="part reveal">
+            <span class="part-num">06</span>
+            <div class="part-card">
+              <div class="part-meta">
+                <span class="pill accent">35 min</span>
+                <span class="pill">Yafu Li</span>
+              </div>
+              <h3>Efficient CoT reasoning</h3>
+              <p>
+                Large reasoning models can repeat steps, overthink, explore failed search branches,
+                and misallocate computation. Following a model-lifecycle taxonomy, we cover concise
+                data and supervision, adaptive inference budgets, routing and early stopping,
+                step- and token-level CoT compression, distillation into shorter or latent traces,
+                continuous reasoning, SFT, and length-aware RL &mdash; evaluating efficiency
+                jointly with accuracy and reliability rather than rationale length alone.
+              </p>
+              <ul class="chips">
+                <li>Overthinking</li>
+                <li>Adaptive budgets</li>
+                <li>Early stopping</li>
+                <li>TokenSkip</li>
+                <li>Distillation</li>
+                <li>Length-aware RL</li>
+              </ul>
+              <div class="session-note">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+                <span><strong>Open questions:</strong> Loop Transformers, continuous thought, reliable stopping criteria, hardware-aware evaluation, and Pareto reporting over tokens, latency, memory, energy, and task success.</span>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== MATERIALS ===================== -->
+    <section class="section" id="materials">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Materials</span>
+          <h2>Slides, readings, and discussion</h2>
+          <p>The tutorial deck and reading list will be released here before the session.</p>
+        </div>
+
+        <div class="res-grid">
+          <article class="res-card reveal">
+            <div class="res-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v12H3z"></path><path d="M8 20l4-4 4 4"></path></svg>
+            </div>
+            <h3>Slides</h3>
+            <p>The full tutorial deck, released as a PDF before the session.</p>
+            <span class="res-link disabled">Coming soon</span>
+          </article>
+
+          <article class="res-card reveal">
+            <div class="res-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
+            <h3>Reading list</h3>
+            <p>Nine primary sources and surveys that form the tutorial&rsquo;s core reading.</p>
+            <a class="res-link" href="#readings">Browse the readings
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </article>
+
+          <article class="res-card reveal">
+            <div class="res-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"></path></svg>
+            </div>
+            <h3>Q&amp;A</h3>
+            <p>Ask questions and discuss the tutorial with the speakers and attendees.</p>
+            <a class="res-link" href="https://github.com/cot-reasoning-tutorials/AAAI-2027-Tutorial/discussions" target="_blank" rel="noopener">GitHub Discussions
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+            </a>
+          </article>
+        </div>
+
+        <div class="readings-panel reveal" id="readings">
+          <h3>Selected readings</h3>
+          <ul class="readings">
+            <li>
+              <a href="https://arxiv.org/abs/2503.09567" target="_blank" rel="noopener">Towards Reasoning Era: A Survey of Long Chain-of-Thought for Reasoning Large Language Models</a>
+              <span>Chen et al. &middot; 2026 &middot; Science China Information Sciences &middot; arXiv:2503.09567</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2503.21614" target="_blank" rel="noopener">A Survey of Efficient Reasoning for Large Reasoning Models: Language, Multimodality, and Beyond</a>
+              <span>Qu et al. &middot; 2025 &middot; arXiv:2503.21614</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2210.03057" target="_blank" rel="noopener">Language Models Are Multilingual Chain-of-Thought Reasoners</a>
+              <span>Shi et al. &middot; 2023 &middot; ICLR &middot; arXiv:2210.03057</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2305.04388" target="_blank" rel="noopener">Language Models Don&rsquo;t Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting</a>
+              <span>Turpin et al. &middot; 2023 &middot; NeurIPS &middot; arXiv:2305.04388</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2402.03268" target="_blank" rel="noopener">Understanding Reasoning Ability of Language Models From the Perspective of Reasoning Paths Aggregation</a>
+              <span>Wang et al. &middot; 2024 &middot; ICML &middot; arXiv:2402.03268</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>
+              <span>Wei et al. &middot; 2022 &middot; NeurIPS &middot; arXiv:2201.11903</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2502.12067" target="_blank" rel="noopener">TokenSkip: Controllable Chain-of-Thought Compression in LLMs</a>
+              <span>Xia et al. &middot; 2025 &middot; EMNLP &middot; arXiv:2502.12067</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2405.18357" target="_blank" rel="noopener">Faithful Logical Reasoning via Symbolic Chain-of-Thought</a>
+              <span>Xu et al. &middot; 2024 &middot; ACL &middot; arXiv:2405.18357</span>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2302.00923" target="_blank" rel="noopener">Multimodal Chain-of-Thought Reasoning in Language Models</a>
+              <span>Zhang et al. &middot; 2024 &middot; TMLR &middot; arXiv:2302.00923</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CITATION ===================== -->
+    <section class="section" id="citation">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Citation</span>
+          <h2>Cite this tutorial</h2>
+          <p>If you reference the tutorial in your work, please use the entry below.</p>
+        </div>
+
+        <div class="citation-box reveal">
+          <div class="citation-head">
+            <span class="citation-label">BibTeX</span>
+            <button class="copy-btn" id="copy-citation" type="button">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre id="bibtex"><code>@inproceedings{qin2027cot,
+  title     = {Chain-of-Thought Reasoning in Large Language Models: Recent Advances and New Frontiers},
+  author    = {Qin, Libo and Fei, Hao and Zhang, Zhuosheng and Pan, Liangming and Li, Yafu and Zhang, Min},
+  booktitle = {Proceedings of the 41st AAAI Conference on Artificial Intelligence (Tutorials)},
+  year      = {2027}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-brand">Chain-of-Thought Reasoning in Large Language Models</p>
+        <p class="fine">AAAI-27 Tutorial &middot; Montr&eacute;al, Canada &middot; February 2027</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/cot-reasoning-tutorials/AAAI-2027-Tutorial" target="_blank" rel="noopener">GitHub</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="mailto:qinlibo@hit.edu.cn">Contact</a>
+      </div>
+      <p class="fine">&copy; 2027 Tutorial Organizers. Speaker photos courtesy of the speakers.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
