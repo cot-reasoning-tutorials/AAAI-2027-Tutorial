@@ -397,6 +397,14 @@ h3 {
   text-align: center;
 }
 
+#overview .section-head {
+  max-width: 900px;
+}
+
+.overview-title {
+  white-space: nowrap;
+}
+
 .eyebrow {
   display: inline-block;
   margin-bottom: 10px;
@@ -620,7 +628,7 @@ h3 {
 }
 
 .part.is-break h3 {
-  margin: 0;
+  margin: 0 auto;
   font-size: 1.05rem;
 }
 
@@ -887,6 +895,12 @@ img.avatar {
 
   .readings {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .overview-title {
+    white-space: normal;
   }
 }
 
