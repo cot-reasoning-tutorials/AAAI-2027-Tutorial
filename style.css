@@ -517,14 +517,6 @@ h3 {
   border-radius: 8px;
 }
 
-.program-figure figcaption {
-  margin-top: 12px;
-  font-size: 0.82rem;
-  line-height: 1.5;
-  text-align: center;
-  color: #59617a;
-}
-
 /* ---------- Program timeline ---------- */
 .timeline {
   position: relative;
