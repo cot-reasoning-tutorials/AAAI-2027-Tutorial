@@ -481,6 +481,10 @@ h3 {
   vertical-align: top;
 }
 
+.schedule-table td:nth-child(2) {
+  white-space: nowrap;
+}
+
 .schedule-table tr:last-child td {
   border-bottom: none;
 }
