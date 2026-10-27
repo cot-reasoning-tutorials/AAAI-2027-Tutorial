@@ -517,8 +517,8 @@ h3 {
   color: var(--muted);
 }
 
-.schedule-table .break-row td {
-  background: color-mix(in srgb, var(--surface-2) 55%, transparent);
+.schedule-table tbody tr:nth-child(even) td {
+  background: var(--surface-2);
 }
 
 /* ---------- Speakers ---------- */
