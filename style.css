@@ -549,11 +549,21 @@ h3 {
 }
 
 .avatar-link {
+  position: relative;
   display: block;
   width: 144px;
   height: 144px;
   margin: 0 auto 20px;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar-bg {
+  position: absolute;
+  inset: -12%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(14px);
 }
 
 .avatar-link:focus-visible {
@@ -562,7 +572,20 @@ h3 {
 }
 
 .avatar-link .avatar {
+  position: relative;
   margin: 0;
+}
+
+.avatar-zhuosheng .avatar {
+  transform: translate(5%, 5%) scale(1.12);
+}
+
+.avatar-minzhang .avatar {
+  transform: translateY(5%) scale(1.1);
+}
+
+.avatar-qin .avatar {
+  transform: scale(0.86);
 }
 
 .avatar {
