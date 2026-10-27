@@ -379,6 +379,10 @@ h3 {
   object-fit: contain;
 }
 
+.hero-logos img.logo-round {
+  border-radius: 50%;
+}
+
 [data-theme="dark"] .hero-logos img {
   height: 68px;
   padding: 8px;
