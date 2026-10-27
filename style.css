@@ -171,8 +171,9 @@ h3 {
 }
 
 .brand-mark {
-  width: 32px;
   height: 32px;
+  width: auto;
+  max-width: 96px;
   flex: none;
   object-fit: contain;
 }
@@ -558,9 +559,9 @@ h3 {
 
 .avatar-link {
   display: block;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 18px;
+  width: 144px;
+  height: 144px;
+  margin: 0 auto 20px;
   border-radius: 50%;
 }
 
@@ -574,8 +575,8 @@ h3 {
 }
 
 .avatar {
-  width: 120px;
-  height: 120px;
+  width: 144px;
+  height: 144px;
   display: grid;
   place-items: center;
   margin: 0 auto 16px;
@@ -614,13 +615,13 @@ img.avatar {
 
 .speaker h3 {
   margin: 0 0 4px;
-  font-size: 1.02rem;
+  font-size: 1.15rem;
   font-weight: 600;
 }
 
 .speaker .affil {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
