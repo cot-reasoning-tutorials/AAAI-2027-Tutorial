@@ -66,6 +66,7 @@ main.js             — theme toggle, mobile nav, scroll effects, copy button
 assets/favicon.svg  — tab icon
 assets/preview.png  — 1200×630 social preview image (Open Graph)
 assets/program-outline.png — tutorial outline figure (Figure 1)
+assets/logos/       — institution logos for the affiliation strip
 assets/people/      — speaker portraits
 ```
 
