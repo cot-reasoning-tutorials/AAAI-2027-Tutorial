@@ -513,6 +513,7 @@ h3 {
 .schedule-table .time {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  vertical-align: middle;
   color: var(--muted);
 }
 
