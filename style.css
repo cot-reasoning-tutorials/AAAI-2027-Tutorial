@@ -779,12 +779,26 @@ img.avatar {
 
 .readings {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 32px;
+  grid-template-columns: 1fr;
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
   text-align: left;
+}
+
+.readings li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.readings li:first-child {
+  padding-top: 0;
+}
+
+.readings li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .readings a {
