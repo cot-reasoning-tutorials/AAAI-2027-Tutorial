@@ -171,9 +171,8 @@ h3 {
 }
 
 .brand-mark {
+  width: 32px;
   height: 32px;
-  width: auto;
-  max-width: 96px;
   flex: none;
   object-fit: contain;
 }
@@ -387,6 +386,10 @@ h3 {
 
 .hero-logos img.logo-round {
   border-radius: 50%;
+}
+
+.hero-logos img.logo-wide {
+  max-width: 190px;
 }
 
 [data-theme="dark"] .hero-logos img {
