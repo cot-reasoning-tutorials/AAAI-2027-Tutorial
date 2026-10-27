@@ -173,8 +173,13 @@ h3 {
 .brand-mark {
   width: 32px;
   height: 32px;
-  color: var(--accent);
   flex: none;
+  object-fit: contain;
+}
+
+[data-theme="dark"] .brand-mark {
+  border-radius: 8px;
+  background: #ffffff;
 }
 
 .brand-text {
