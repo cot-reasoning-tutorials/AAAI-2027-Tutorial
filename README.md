@@ -74,7 +74,7 @@ assets/people/      — speaker portraits
 - **Light / dark theme** follows the system preference and can be toggled; the choice is
   remembered in `localStorage`.
 - **Centered layout** throughout: headings, prose, and grids are centered on the page;
-  the Program section presents the schedule as a table modeled on the reference site.
+  the Schedule section presents the sessions as a table modeled on the reference site.
 - **Responsive** down to 360 px: the navigation collapses into a menu and every section
   stacks cleanly.
 - **Accessibility**: skip link, visible focus rings, semantic landmarks, and

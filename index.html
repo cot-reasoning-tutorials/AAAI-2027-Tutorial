@@ -61,8 +61,8 @@
         <ul class="nav-links" id="nav-links">
           <li><a href="#overview">Overview</a></li>
           <li><a href="#speakers">Speakers</a></li>
-          <li><a href="#program">Program</a></li>
-          <li><a href="#materials">Materials</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#readings">Readings</a></li>
         </ul>
 
         <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
@@ -127,8 +127,7 @@
     <section class="section" id="overview">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Overview</span>
-          <h2 class="overview-title">A systematic map of chain-of-thought reasoning</h2>
+          <h2 class="section-title">Overview</h2>
         </div>
 
         <div class="prose reveal">
@@ -167,8 +166,7 @@
     <section class="section" id="speakers">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Speakers</span>
-          <h2>Tutorial team</h2>
+          <h2 class="section-title">Speakers</h2>
         </div>
 
         <ul class="speakers-grid">
@@ -219,11 +217,10 @@
     </section>
 
     <!-- ===================== PROGRAM ===================== -->
-    <section class="section" id="program">
+    <section class="section" id="schedule">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Program</span>
-          <h2>Six sessions, one coherent story</h2>
+          <h2 class="section-title">Schedule</h2>
         </div>
 
         <figure class="program-figure reveal">
@@ -241,17 +238,17 @@
             </thead>
             <tbody>
               <tr>
-                <td class="session"><strong>Background and recent advances</strong>We define CoT reasoning, trace its origins in intermediate rationales, and review its impact on arithmetic, symbolic, commonsense, and code tasks. A recent taxonomy connects prompting strategies to long-CoT reasoning models.</td>
+                <td class="session"><strong>Background and recent advances</strong>Definition, taxonomy, and the evolution from short rationales to long-CoT reasoning models.</td>
                 <td>Libo Qin, Min Zhang</td>
                 <td class="time">35 min</td>
               </tr>
               <tr>
-                <td class="session"><strong>Mechanisms of CoT reasoning</strong>We distinguish explicit CoT, implicit reasoning, and latent CoT. The session reviews reasoning-path analysis and interpretability tools such as logit lenses, activation patching, and causal interventions.</td>
+                <td class="session"><strong>Mechanisms of CoT reasoning</strong>Explicit, implicit, and latent reasoning, plus the interpretability tools used to study them.</td>
                 <td>Liangming Pan</td>
                 <td class="time">35 min</td>
               </tr>
               <tr>
-                <td class="session"><strong>Cross-lingual CoT reasoning</strong>We separate the language of the question, demonstrations, rationale, and answer. The session compares multilingual prompting, translate-then-reason and reason-then-translate pipelines, and challenges in low-resource languages.</td>
+                <td class="session"><strong>Cross-lingual CoT reasoning</strong>Multilingual prompting strategies, cross-lingual transfer, and the challenges of low-resource languages.</td>
                 <td>Libo Qin</td>
                 <td class="time">35 min</td>
               </tr>
@@ -261,17 +258,17 @@
                 <td class="time">30 min</td>
               </tr>
               <tr>
-                <td class="session"><strong>Cross-modal CoT reasoning</strong>Structured intermediate steps can bridge language with spatial and temporal evidence in images and videos. We cover two-stage rationale-and-answer models, interleaved visual-text traces, and temporally grounded video reasoning.</td>
+                <td class="session"><strong>Cross-modal CoT reasoning</strong>Grounding language reasoning in visual and video evidence, from perception to inference.</td>
                 <td>Hao Fei</td>
                 <td class="time">35 min</td>
               </tr>
               <tr>
-                <td class="session"><strong>Faithful CoT reasoning</strong>A fluent rationale can be plausible without reflecting what actually drove a prediction. We separate answer correctness, step validity, evidence grounding, causal faithfulness, and calibration, then review verification methods.</td>
+                <td class="session"><strong>Faithful CoT reasoning</strong>What makes a rationale faithful, and how to verify it with causal and process-level tests.</td>
                 <td>Zhuosheng Zhang</td>
                 <td class="time">35 min</td>
               </tr>
               <tr>
-                <td class="session"><strong>Efficient CoT reasoning</strong>Large reasoning models can repeat steps, overthink, and misallocate computation. We cover adaptive inference budgets, early stopping, token-level compression, distillation, and length-aware reinforcement learning.</td>
+                <td class="session"><strong>Efficient CoT reasoning</strong>Reducing overthinking and inference cost through adaptive computation, compression, and distillation.</td>
                 <td>Yafu Li</td>
                 <td class="time">35 min</td>
               </tr>
@@ -282,14 +279,13 @@
     </section>
 
     <!-- ===================== MATERIALS ===================== -->
-    <section class="section" id="materials">
+    <section class="section" id="readings">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Materials</span>
-          <h2>Readings</h2>
+          <h2 class="section-title">Readings</h2>
         </div>
 
-        <div class="readings-panel reveal" id="readings">
+        <div class="readings-panel reveal">
           <ul class="readings">
             <li>
               <a href="https://arxiv.org/abs/2503.09567" target="_blank" rel="noopener">Towards Reasoning Era: A Survey of Long Chain-of-Thought for Reasoning Large Language Models</a>
