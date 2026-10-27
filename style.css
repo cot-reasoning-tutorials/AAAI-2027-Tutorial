@@ -395,6 +395,10 @@ h3 {
   background: #ffffff;
 }
 
+[data-theme="dark"] .hero-logos img.logo-round {
+  border-radius: 50%;
+}
+
 /* ---------- Sections ---------- */
 .section {
   padding: 84px 0;
