@@ -39,7 +39,7 @@ things that are only known closer to the conference.
 
 ### Speaker photos
 
-Portraits are in `assets/people/` (400×400, center-cropped):
+Portraits are in `assets/people/` (400×400, face-centered crops):
 
 | Speaker | Source |
 | --- | --- |
